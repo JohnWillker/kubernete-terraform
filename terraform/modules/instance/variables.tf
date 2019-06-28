@@ -2,6 +2,11 @@ variable "ami" {
   description = "ID of AMI to use for the instance"
 }
 
+variable "key_name" {
+  description = "The key name to use for the instance"
+  default     = ""
+}
+
 variable "count" {
   description = "Number of instances to launch"
   default     = 1
@@ -18,4 +23,9 @@ variable "instance_type" {
 
 variable "name" {
   description = "The name of instance"
+}
+
+variable "vpc_security_group_ids" {
+  description = "A list of security group IDs to associate with"
+  type        = "list"
 }
