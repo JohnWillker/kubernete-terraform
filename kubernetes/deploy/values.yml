@@ -1,0 +1,22 @@
+replicaCount: 1
+image:
+  repository: gitlab.example.com/group/project
+  tag: lastest
+  pullPolicy: Always
+service:
+  name: hello-service
+  type: ClusterIP
+  build_name: test
+  externalPort: 5000
+  internalPort: 5000
+resources:
+ limits:
+   cpu: 1000m
+   memory: 1000Mi
+ requests:
+   cpu: 200m
+   memory: 200Mi
+readinessprobe:
+  initialDelaySeconds: 10
+livenessprobe:
+  initialDelaySeconds: 10
