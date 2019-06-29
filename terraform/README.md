@@ -1,5 +1,7 @@
 # Terraform
 
+Faz o deploy de uma instância amazon Linux com container httpd rondando na porta 80
+
 ## Uso
 
 Deploy com 1 comando:

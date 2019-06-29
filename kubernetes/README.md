@@ -1,5 +1,7 @@
 # Kubernetes
 
+Faz o deploy de uma app node em um Kubernetes local(minkube) usando Helm
+
 ## Uso
 
 Prerequisitos locais:
