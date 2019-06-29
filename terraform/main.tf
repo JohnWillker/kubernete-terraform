@@ -21,13 +21,23 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+locals {
+  instance-userdata = <<USERDATA
+#!/bin/bash
+set -o xtrace
+sudo su && yum -y install docker && service docker start && docker run -p 80:80 httpd:2.4
+USERDATA
+}
+
 # Create the instance
 module "ec2_instance" {
-  source        = "./modules/instance"
-  name          = "Instance"
-  ami           = "${data.aws_ami.amazon_linux.id}"
-  instance_type = "t2.micro"
-  count         = 1
+  source           = "./modules/instance"
+  name             = "Instance"
+  ami              = "${data.aws_ami.amazon_linux.id}"
+  instance_type    = "t2.micro"
+  count            = 1
+  user_data_base64 = "${base64encode(local.instance-userdata)}"
+  key_name         = "Bastion_Key"
 
   vpc_security_group_ids = [
     "${module.security_group.security_group_id}"
